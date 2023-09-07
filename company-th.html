@@ -1,0 +1,490 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Prompt|Trirong">
+    <link href="https://unpkg.com/survey-jquery/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery/survey.jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+body {
+  font-family: "Trirong", sans-serif;
+}
+h1,h2,h3 {
+  font-family: "Prompt", sans-serif;
+}
+</style>
+<script>
+var json = {
+    title: "เพื่อให้ท่านสามารถเข้าใจใน Package สมาชิก และเลือกเป็น Sponsor ใน Project ของเราได้อย่างเหมาะสม กรุณากรอกลักษณะของบริษัทของท่าน เพื่อเลือกว่าท่านจะเหมาะกับ Project ใดของเรา",
+    showProgressBar: "bottom",
+    pages: [{
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "companyType",
+                    title: "Which of the following best describes your company?",
+                    choices: [
+                        "Tech Companies & Startups",
+                        "Larger Corporations seeking Digital Transformation",
+                        "Brands and Companies looking for Exposure"
+                    ],
+                    isRequired: true
+                }
+            ]
+        },
+        {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "subType",
+                    visibleIf: "{companyType}='Tech Companies & Startups'",
+                    title: "Which best describes your startup or tech company?",
+                    choices: ["Early-stage", "Growth-stage", "Established Tech Company", "Tech Companies focused on Recruitment", "Tech Companies undergoing Digital Transformation"],
+                    isRequired: true
+                },
+                {
+                    type: "radiogroup",
+                    name: "subType",
+                    visibleIf: "{companyType}='Larger Corporations seeking Digital Transformation'",
+                    title: "Which stage is your corporation in regarding digital transformation?",
+                    choices: ["Initial stages", "Active digital transformation", "Digital branding", "Corporations Looking to Expand Digital Talent Pool", "Corporations Focused on Product Digitalization"],
+                    isRequired: true
+                },
+                {
+                    type: "radiogroup",
+                    name: "subType",
+                    visibleIf: "{companyType}='Brands and Companies looking for Exposure'",
+                    title: "What's your brand's main objective?",
+                    choices: ["Emerging Brand", "Digital Reinvention", "Product Launch", "Brands Targeting Tech-Savvy Audience", "Niche Brands Seeking Specific Exposure"],
+                    isRequired: true
+                }
+            ]
+        },
+        {
+    questions: [
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Early-stage'",
+            html: "<h3>Recommended for Early-stage Tech Companies & Startups:</h3>" +
+                  "<p><b>Membership Package:</b> Access newsletters, booth events, and more to boost your visibility.</p>" +
+                  "<p><b>Consult Service:</b> Utilize expert guidance in digital transformation, agile, and other digital technologies.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Growth-stage'",
+            html: "<h3>Recommended for Growth-stage Startups:</h3>" +
+                  "<p><b>Job Fair Sponsorship:</b> Find the right talent by participating in our specialized job fairs. Held twice a month, exclusively for companies like yours.</p>" +
+                  "<p><b>E-Catalog:</b> Showcase your evolving products in our e-catalog distributed to 500+ entities in our ecosystem.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Established Tech Company'",
+            html: "<h3>Recommended for Established Tech Companies:</h3>" +
+                  "<p><b>Recruitment Sponsorship:</b> Train potential hires in our coding bootcamp. They learn for free, work for you for a year.</p>" +
+                  "<p><b>Tech Conference:</b> Get involved in the tech conversation by attending or speaking at our renowned tech conferences in Khon Kaen and Chon Buri.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Initial stages'",
+            html: "<h3>Recommended for Corporations in Initial Stages of Digital Transition:</h3>" +
+                  "<p><b>Consult Service:</b> Kickstart your digital journey with our expert consultations in digital transformation, agile methodologies, and UX/UI design.</p>" +
+                  "<p><b>The Digital Channel:</b> Get exposure and learn from peers in our weekly 1-hour digital event.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Active digital transformation'",
+            html: "<h3>Recommended for Corporations Actively Undergoing Digital Transformation:</h3>" +
+                  "<p><b>Premium Membership Package:</b> Benefit from 6 free courses, appear in The Digital Channel, get exclusive discounts, and more to further your digital capabilities.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Digital branding'",
+            html: "<h3>Recommended for Corporations Seeking Branding in the Digital Ecosystem:</h3>" +
+                  "<p><b>Branding Sponsorship:</b> Place your logo on all our materials, enhancing your brand's visibility in the digital ecosystem.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Emerging Brand'",
+            html: "<h3>Recommended for Emerging Brands:</h3>" +
+                  "<p><b>Membership Package:</b> Establish your brand's presence with access to our newsletters, booth events, and more.</p>" +
+                  "<p><b>The Digital Channel:</b> Feature your brand in our weekly digital event, increasing its recognition among our audience.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Digital Reinvention'",
+            html: "<h3>Recommended for Established Brands Seeking Digital Reinvention:</h3>" +
+                  "<p><b>Tech Conference:</b> Engage with top speakers from Thailand and modernize your brand's digital image.</p>" +
+                  "<p><b>Consult Service:</b> Reframe your digital strategy with our consultancy services in digital technologies.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Product Launch'",
+            html: "<h3>Recommended for Brands Launching New Products:</h3>" +
+                  "<p><b>E-Catalog:</b> Feature your new product in our e-catalog, which reaches a vast ecosystem of 500 companies, governments, and universities.</p>"
+        },
+		 {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Tech Companies focused on Recruitment'",
+            html: "<h3>Recommended for Tech Companies Focused on Recruitment:</h3>" +
+                  "<p><b>Recruitment Sponsorship:</b> Train potential hires in our coding bootcamp. They learn for free, work for you for a year.</p>" +
+                  "<p><b>Job Fair Sponsorship:</b> Enhance your recruitment efforts with our bi-monthly job fairs, targeting Level B universities.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Tech Companies undergoing Digital Transformation'",
+            html: "<h3>Recommended for Tech Companies Undergoing Digital Transformation:</h3>" +
+                  "<p><b>Consult Service:</b> Navigate your digital transition smoothly with our expert consultations in digital transformation, agile methodologies, and more.</p>" +
+                  "<p><b>Premium Membership Package:</b> Get access to specialized courses, e-catalog placements, and other benefits tailored for your digital journey.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Corporations Looking to Expand Digital Talent Pool'",
+            html: "<h3>Recommended for Corporations Expanding their Digital Talent Pool:</h3>" +
+                  "<p><b>Job Fair Sponsorship:</b> Reach out to a wide talent pool through our specialized job fairs. Find the talent that fits your digital ambitions.</p>" +
+                  "<p><b>Recruitment Sponsorship:</b> Collaborate with us in our coding bootcamps to groom talent for your future needs.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Corporations Focused on Product Digitalization'",
+            html: "<h3>Recommended for Corporations Focused on Product Digitalization:</h3>" +
+                  "<p><b>E-Catalog:</b> Highlight your newly digitalized products in our extensive e-catalog, reaching out to a vast and relevant audience.</p>" +
+                  "<p><b>Consult Service:</b> Refine your product digitalization strategies and implementations with our expert advice.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Brands Targeting Tech-Savvy Audience'",
+            html: "<h3>Recommended for Brands Targeting a Tech-Savvy Audience:</h3>" +
+                  "<p><b>The Digital Channel:</b> Engage directly with the tech-savvy audience in our weekly 1-hour digital event.</p>" +
+                  "<p><b>Tech Conference:</b> Position your brand alongside top tech speakers and events, enhancing your brand's tech credibility.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Niche Brands Seeking Specific Exposure'",
+            html: "<h3>Recommended for Niche Brands Seeking Specific Exposure:</h3>" +
+                  "<p><b>E-Catalog:</b> Find the right audience for your niche offerings through placements in our e-catalog.</p>" +
+                  "<p><b>Membership Package:</b> Engage with a specialized audience through newsletters, booth events, and more to enhance your niche presence.</p>"
+        }
+    ]
+}
+
+    ]
+};
+
+var survey = new Survey.Model(json);
+
+survey.onComplete.add(function(sender, options) {
+    //var resultAsString = JSON.stringify(options.data);
+    //alert(resultAsString); // This just shows the survey results. You can replace this with a more suitable function, like sending data to a backend or generating a report.
+});
+
+
+$(function() {
+    $("#surveyElement").Survey({ model: survey });
+});
+</script>
+</head>
+<body>
+<h1><a href="company.html">Home</a></h1>
+<div class="container mt-4">
+	<h2 class="mb-4">โครงการรับสมัครสมาชิกของ ATSI และรับสมัคร Sponsor สำหรับ Project ต่างๆ ของ ATSI</h2>
+	 <div class="container">
+
+        <!-- Title Section -->
+        <div class="text-center mb-5">
+            <h2>ATSI และ SE HUB นำเสนอโครงการพัฒนาศักยภาพดิจิทัล</h2>
+        </div>
+
+        <!-- Highlighted Offers -->
+        <div class="alert alert-primary">
+            แจก Course ฟรี บริษัทละ 1 course ต่อ 1 ที่นั่ง ใน 5 course ของเรา(มูลค่ารวม 60,000 บาท)
+        </div>
+        <div class="alert alert-success">
+            พิเศษ สำหรับสมาชิกสมาคม ATSI สามารถ สมัคร package premium เพียง 2,000 บาท เพื่อรับ course เพิ่ม อีกบริษัท ละ 1 ที่ ต่อ 1 course
+        </div>
+
+        <!-- Detailed Description -->
+        <p class="lead">
+            เนื่องด้วย ATSI [สมาคมอุตสาหกรรมซอฟต์แวร์ไทย] ร่วมกับ SE HUB มีความประสงค์ที่จะนำเสนอโครงการ พัฒนาศักยภาพบุคลากรด้านการพัฒนาซอฟต์แวร์และทักษะความรู้ความชำนาญในการใช้เครื่องมือในยุคดิจิทัลแบบครอบคลุมทั่วประเทศ
+        </p>
+
+        <h4 class="mb-4">Course ที่นำเสนอ:</h4>
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item">1. Open code lab camp - เรียน 4 เดือนเต็ม จบมาเป็น Programmer ได้</li>
+            <li class="list-group-item">2. Pre camp open code lab - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">3. Digital transformation camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">4. Low Code Camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">5. TAs boot Camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">6. English IT Camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+        </ul>
+		<p class="lead">
+            ซึ่งโครงการนี้รับผิดชอบดำเนินโครงการโดย คุณ กฤษฏา เฉลิมสุข (คุณโอ๊ค) ผู้ร่วมก่อตั้งและอดีตนายกสมาคมโปรแกรมเมอร์ไทย ซึ่งเป็นผู้มีประสบการณ์ การปั้น บุคลากร Programmer มาแล้วไม่ต่ำกว่า 300 ราย
+        </p>
+
+        <h4 class="mb-4">แนวคิดของโครงการ:</h4>
+        <p>
+            แนวคิดหลักของโครงการคือ การพัฒนาบุคคลากรด้านเทคโนโลยีดิจิทัลที่มีคุณภาพเพื่อรองรับต่อความต้องการของผู้ประกอบการและประเทศ และ เพื่อส่งเสริมพัฒนาบุคลากรที่มีคุณภาพได้อย่างต่อเนื่องและยั่งยืน
+        </p>
+        <p class="lead">
+            เราเชื่อว่าโครงการนี้จะมีผลที่ดีต่อผู้ประกอบการและต่อสังคม ซึ่งเรากำลังมองหาผู้ร่วมสนับสนุนที่การดำเนินการโครงการได้อย่างต่อเนื่อง
+        </p>
+
+        <div class="alert alert-info">
+            ทั้งนี้ทางสมาคม มีความประสงค์ที่จะแจกทุนสำหรับหรับ ทุกๆ แคมป์ ให้กับทางผู้ประกอบการ ได้ส่งพนักงานเข้ามา upskill ฟรี 1 ท่าน ในทุกๆ camp (*ยกเว้น open code lab camp)
+        </div>
+		<hr/>
+		<div class="text-center mb-5">
+            <h2>ATSI และ SE HUB รับสมัคร Sponsor สำหรับ Project ต่างๆ ของ ATSI</h2>
+        </div>
+		<h4 class="mb-4">โครงการอื่นๆ  ที่นำเสนอ เพื่อขอสนับสนุน Sponsor (ดูรายละเอียดเพิ่มเติมได้ที่ด้านล่างหน้านี้)</h4>
+        <ul class="list-group list-group-flush mb-4">
+    <li class="list-group-item">
+        <strong>Basic Membership Package - 4,000 baht/month</strong>
+        <ul>
+            <li>Access to company newsletters.</li>
+            <li>Access to booth events.</li>
+            <li>Inclusion of company's products in the e-catalog (up to 2 pages).</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Premium Membership Package - Additional 2,000 baht (requires Basic Membership)</strong>
+        <ul>
+            <li>All benefits of the Basic Membership.</li>
+            <li>Access to 6 courses for free.</li>
+            <li>Inclusion of company's products in the e-catalog (up to 2 pages).</li>
+            <li>One-hour of Digital Consultancy Services.</li>
+            <li>Opportunity to appear once on The Digital Channel.</li>
+            <li>Discounts of 10-50% on tech conference tickets.</li>
+            <li>Eligibility to participate in our Job Fair.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Branding Sponsorship</strong>
+        <ul>
+            <li>Logo placement on all materials within our ecosystem.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Recruitment Sponsorship (Coding Bootcamp)</strong>
+        <ul>
+            <li>Companies sponsor students' tuition fees.</li>
+            <li>Students learn for free.</li>
+            <li>Students are committed to work for the sponsoring company for at least 1 year.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Job Fair Sponsorship</strong>
+        <ul>
+            <li>Exposure at job fairs hosted in Level B universities and onwards (excluding Level A universities).</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Tech Conferences</strong>
+        <ul>
+            <li>Events hosted in Khon Kaen and Chon Buri.</li>
+            <li>Features top speakers from Thailand.</li>
+            <li>300 attendees per event.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>E-Catalog</strong>
+        <ul>
+            <li>Basic Membership holders can list their products (up to 2 pages).</li>
+            <li>Additional payment allows for more product listings.</li>
+            <li>Catalog is sent to 500 entities, including companies, government agencies, and universities.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>The Digital Channel</strong>
+        <ul>
+            <li>Hourly event aired once a week.</li>
+            <li>Opportunities for companies to participate.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Digital Consultancy Services</strong>
+        <ul>
+            <li>Guidance on digital transformation, agile methodologies, UX/UI design, and other digital technologies.</li>
+        </ul>
+    </li>
+</ul>
+        
+
+        <!-- Action -->
+        <div class="mt-5">
+            <h5>สนใจทราบข้อมูลเพิ่มเติม:</h5>
+            <p>
+                หากทางผู้ประกอบการมีความประสงค์รับฟังข้อมูลโครงการ เพิ่มเติม สามารถทัก chat line เพื่อขอข้อมูลเพิ่มเติมได้เลยค่ะ
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div id="surveyElement"></div>
+<div class="container mt-4">
+    <h2 class="mb-4">รายละเอียดเพิ่มเติมสำหรับรายการ Package สมาชิก และ Project ที่ท่านสามารถช่วยสนับสนุนได้ <a href="sehub.pdf" target="_blank"> Download Full Presentation</a></h2>
+
+    <!-- Membership Package -->
+    <div class="card mb-4">
+         <div class="card-body">
+            <h5 class="card-title">แพ็กเกจสมาชิก (4,000 บาท/ปี)</h5>
+            <p class="card-text">
+                <ul>
+                    <li>เข้าถึงข่าวสารเฉพาะทางที่เป็นองค์ความรู้ ทำให้คุณอัพเดทกับแนวโน้มในอุตสาหกรรม</li>
+                    <li>รับคำเชิญเป็นความสำคัญเพื่อเข้าร่วมกิจกรรมที่บูธพิเศษ โอกาสที่ดีสำหรับการเครือข่าย</li>
+                    <li>อยู่ข้างหน้าคู่แข่งด้วยการเข้าถึงเนื้อหาที่คัดเลือกของเรา</li>
+                    <li>ได้รับสิทธิพิเศษและโปรโมชันเฉพาะสมาชิก</li>
+                    <li>เป็นส่วนหนึ่งของชุมชนที่ให้ความสำคัญกับการแบ่งปันความรู้และนวัตกรรม</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Premium Membership Package -->
+    <div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">แพ็กเกจสมาชิกพรีเมียม</h5>
+        <p class="card-text">
+            <ul>
+                <li>เข้าถึงหลักสูตรที่ทันสมัย 6 หลักสูตรต่อปี เพื่อเสริมสกิลของทีมของคุณ</li>
+                <li>โชว์เคสใน E-Catalog ของเรา 2 หน้า เพื่อเพิ่มความเห็นชอบต่อแบรนด์ของคุณ</li>
+                <li>รับคำปรึกษาดิจิทัลจากผู้เชี่ยวชาญ 1 ชั่วโมง เพื่อแนะนำกลยุทธ์ธุรกิจของคุณ</li>
+                <li>โอกาสที่เด่นเพื่อปรากฏบน "ช่องดิจิทัล" เพิ่มการเข้าถึง</li>
+                <li>รับส่วนลดพิเศษในการประชุมวิชาการด้านเทคโนโลยีและเข้าถึงงานจัดหางานของเราเป็นพิเศษ</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<!-- Sponsorship for Branding -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">การสนับสนุนเพื่อการสร้างแบรนด์</h5>
+        <p class="card-text">
+            <ul>
+                <li>จัดตำแหน่งแบรนด์ของคุณในทุกวัสดุของระบบนิเวศของเรา</li>
+                <li>สร้างความประทับใจให้กับฐานผู้ชมของเรา</li>
+                <li>ได้รับการเปิดเผยและการยอมรับในกิจกรรมและเวบินาร์</li>
+                <li>รับการจัดวางที่มีลำดับความสำคัญในการเผยแพร่และคุณสมบัติของเรา</li>
+                <li>ใช้ประโยชน์จากโอกาสในการเครือข่ายกับพาร์ทเนอร์และผู้มีส่วนได้ส่วนเสียของเรา</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+    <!-- Sponsorship for Recruitment -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">การสนับสนุนเพื่อการรับสมัคร</h5>
+        <p class="card-text">
+            <ul>
+                <li>สนับสนุนค่าเรียนของนักเรียนและได้รับพนักงานที่มีความทุ่มเทในการทำงานอย่างน้อยหนึ่งปี</li>
+                <li>รูปร่างกำลังแรงงานอนาคตด้วยการสนับสนุนการศึกษาของพวกเขา</li>
+                <li>รับความกตัญญูและความภักดีต่อแบรนด์จากนักเรียนที่ได้รับการสนับสนุน</li>
+                <li>เพิ่มชื่อเสียงของแบรนด์ของคุณในฐานะผู้สนับสนุนและที่ปรึกษาในอุตสาหกรรม</li>
+                <li>รับประโยชน์จากการได้รับส่วนลดภาษีและการเผยแพร่ข่าวที่มีผลต่อความนิยม</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<!-- Sponsorship for Job Fair -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">การสนับสนุนสำหรับงานจัดหางาน</h5>
+        <p class="card-text">
+            <ul>
+                <li>การเผยแพร่แบรนด์อย่างเป็นเอกลักษณ์ในงานจัดหางานของเราทุกๆสองเดือน</li>
+                <li>เข้าถึงความสามารถที่ยังไม่ได้ถูกสัมผัสจากมหาวิทยาลัยหลายแห่ง</li>
+                <li>มีโอกาสพูดคุยโต้ตอบโดยตรงกับผู้ที่มีศักยภาพในการรับเข้าทำงานในบริษัท</li>
+                <li>จัดตำแหน่งบริษัทของคุณให้เป็นที่ต้องการของผู้สมัคร</li>
+                <li>เพิ่มความเห็นชอบต่อแบรนด์ในหมู่ผู้สำเร็จการศึกษาใหม่</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+    <!-- Tech Conference -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">การประชุมเทคโนโลยี</h5>
+        <p class="card-text">
+            <ul>
+                <li>สัมผัสกับวิทยากรและผู้นำความคิดจากทั่วประเทศไทย</li>
+                <li>สร้างเครือข่ายกับผู้เข้าร่วมงานมากกว่า 300 คนและผู้ที่มีศักยภาพในการทำงานร่วมกันในทุกกิจกรรม</li>
+                <li>อัปเดตเทรนด์และนวัตกรรมเทคโนโลยีล่าสุด</li>
+                <li>มีโอกาสเพื่อการเผยแพร่แบรนด์ในกลุ่มผู้ฟังที่มีความรู้ทางเทคโนโลยี</li>
+                <li>เพิ่มการพัฒนาทางวิชาชีพและการเชื่อมโยงในอุตสาหกรรมสำหรับบริษัทของคุณ</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<!-- E-Catalog -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">E-แคตตาล็อก</h5>
+        <p class="card-text">
+            <ul>
+                <li>นำเสนอผลิตภัณฑ์หรือบริการของคุณให้กับกลุ่มผู้ฟังที่กว้างใน e-แคตตาล็อกของเรา</li>
+                <li>ได้รับประโยชน์จากเครือข่ายการกระจายของเราที่มีบริษัท, รัฐบาล, และมหาวิทยาลัยมากกว่า 500 แห่ง</li>
+                <li>เพิ่มการรับรู้และการรู้จักแบรนด์ในแคตตาล็อกแบบพรีเมียม</li>
+                <li>มีตัวเลือกเพื่อเพิ่มการเผยแพร่แบรนด์ของคุณด้วยหน้าเพิ่มเติม</li>
+                <li>ขับเคลื่อนการเยี่ยมชมที่มุ่งมั่นและสร้างโอกาสธุรกิจจากผู้อ่านที่หลากหลาย</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<!-- The Digital Channel -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">ช่องทางดิจิทัล</h5>
+        <p class="card-text">
+            <ul>
+                <li>ได้รับการเผยแพร่อย่างมีนัยยะโดยการปรากฏในช่องทางดิจิทัลที่เราให้ความเห็นชอบ</li>
+                <li>มีส่วนร่วมกับฐานผู้ฟังของเรา เพิ่มความจำได้ของแบรนด์</li>
+                <li>ทำงานร่วมกับผู้มีอิทธิพลและผู้นำความคิดในวงการเทคโนโลยี</li>
+                <li>การผลิตวิดีโอที่ถูกปรับให้เหมาะสม แน่นอนว่าจะแทนแบรนด์ของคุณในรูปแบบมืออาชีพ</li>
+                <li>ได้รับประโยชน์จากการส่งเสริมข้ามแพลตฟอร์มบนเว็บไซต์, โซเชียลมีเดีย, และแพลตฟอร์มอื่นๆ</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+<!-- Consult Service -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">บริการปรึกษา</h5>
+        <p class="card-text">
+            <ul>
+                <li>ได้รับประโยชน์จากคำแนะนำของเราที่ปรับเปลี่ยนให้เหมาะกับความต้องการธุรกิจเฉพาะของคุณ</li>
+                <li>รับกลยุทธ์ที่สามารถดำเนินการเพื่อขับเคลื่อนการนำเข้าดิจิทัลและปรับปรุงการประสิทธิภาพ</li>
+                <li>การประเมินที่จะเกิดขึ้นประจำปีเพื่อตรวจสอบความก้าวหน้าและการปรับปรุง</li>
+                <li>การบริการที่รวดเร็ว, มืออาชีพ และเป็นมิตร</li>
+                <li>รับประโยชน์จากการมีผู้ปรึกษาที่มีความรู้และประสบการณ์ในอุตสาหกรรม</li>
+            </ul>
+        </p>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
