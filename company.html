@@ -1,0 +1,295 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="https://unpkg.com/survey-jquery/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery/survey.jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+var json = {
+    title: "Company Product Recommendation Survey",
+    showProgressBar: "bottom",
+    pages: [{
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "companyType",
+                    title: "Which of the following best describes your company?",
+                    choices: [
+                        "Tech Companies & Startups",
+                        "Larger Corporations seeking Digital Transformation",
+                        "Brands and Companies looking for Exposure"
+                    ],
+                    isRequired: true
+                }
+            ]
+        },
+        {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "subType",
+                    visibleIf: "{companyType}='Tech Companies & Startups'",
+                    title: "Which best describes your startup or tech company?",
+                    choices: ["Early-stage", "Growth-stage", "Established Tech Company", "Tech Companies focused on Recruitment", "Tech Companies undergoing Digital Transformation"],
+                    isRequired: true
+                },
+                {
+                    type: "radiogroup",
+                    name: "subType",
+                    visibleIf: "{companyType}='Larger Corporations seeking Digital Transformation'",
+                    title: "Which stage is your corporation in regarding digital transformation?",
+                    choices: ["Initial stages", "Active digital transformation", "Digital branding", "Corporations Looking to Expand Digital Talent Pool", "Corporations Focused on Product Digitalization"],
+                    isRequired: true
+                },
+                {
+                    type: "radiogroup",
+                    name: "subType",
+                    visibleIf: "{companyType}='Brands and Companies looking for Exposure'",
+                    title: "What's your brand's main objective?",
+                    choices: ["Emerging Brand", "Digital Reinvention", "Product Launch", "Brands Targeting Tech-Savvy Audience", "Niche Brands Seeking Specific Exposure"],
+                    isRequired: true
+                }
+            ]
+        },
+        {
+    questions: [
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Early-stage'",
+            html: "<h3>Recommended for Early-stage Tech Companies & Startups:</h3>" +
+                  "<p><b>Membership Package:</b> Access newsletters, booth events, and more to boost your visibility.</p>" +
+                  "<p><b>Consult Service:</b> Utilize expert guidance in digital transformation, agile, and other digital technologies.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Growth-stage'",
+            html: "<h3>Recommended for Growth-stage Startups:</h3>" +
+                  "<p><b>Job Fair Sponsorship:</b> Find the right talent by participating in our specialized job fairs. Held twice a month, exclusively for companies like yours.</p>" +
+                  "<p><b>E-Catalog:</b> Showcase your evolving products in our e-catalog distributed to 500+ entities in our ecosystem.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Established Tech Company'",
+            html: "<h3>Recommended for Established Tech Companies:</h3>" +
+                  "<p><b>Recruitment Sponsorship:</b> Train potential hires in our coding bootcamp. They learn for free, work for you for a year.</p>" +
+                  "<p><b>Tech Conference:</b> Get involved in the tech conversation by attending or speaking at our renowned tech conferences in Khon Kaen and Chon Buri.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Initial stages'",
+            html: "<h3>Recommended for Corporations in Initial Stages of Digital Transition:</h3>" +
+                  "<p><b>Consult Service:</b> Kickstart your digital journey with our expert consultations in digital transformation, agile methodologies, and UX/UI design.</p>" +
+                  "<p><b>The Digital Channel:</b> Get exposure and learn from peers in our weekly 1-hour digital event.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Active digital transformation'",
+            html: "<h3>Recommended for Corporations Actively Undergoing Digital Transformation:</h3>" +
+                  "<p><b>Premium Membership Package:</b> Benefit from 6 free courses, appear in The Digital Channel, get exclusive discounts, and more to further your digital capabilities.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Digital branding'",
+            html: "<h3>Recommended for Corporations Seeking Branding in the Digital Ecosystem:</h3>" +
+                  "<p><b>Branding Sponsorship:</b> Place your logo on all our materials, enhancing your brand's visibility in the digital ecosystem.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Emerging Brand'",
+            html: "<h3>Recommended for Emerging Brands:</h3>" +
+                  "<p><b>Membership Package:</b> Establish your brand's presence with access to our newsletters, booth events, and more.</p>" +
+                  "<p><b>The Digital Channel:</b> Feature your brand in our weekly digital event, increasing its recognition among our audience.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Digital Reinvention'",
+            html: "<h3>Recommended for Established Brands Seeking Digital Reinvention:</h3>" +
+                  "<p><b>Tech Conference:</b> Engage with top speakers from Thailand and modernize your brand's digital image.</p>" +
+                  "<p><b>Consult Service:</b> Reframe your digital strategy with our consultancy services in digital technologies.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Product Launch'",
+            html: "<h3>Recommended for Brands Launching New Products:</h3>" +
+                  "<p><b>E-Catalog:</b> Feature your new product in our e-catalog, which reaches a vast ecosystem of 500 companies, governments, and universities.</p>"
+        },
+		 {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Tech Companies focused on Recruitment'",
+            html: "<h3>Recommended for Tech Companies Focused on Recruitment:</h3>" +
+                  "<p><b>Recruitment Sponsorship:</b> Train potential hires in our coding bootcamp. They learn for free, work for you for a year.</p>" +
+                  "<p><b>Job Fair Sponsorship:</b> Enhance your recruitment efforts with our bi-monthly job fairs, targeting Level B universities.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Tech Companies undergoing Digital Transformation'",
+            html: "<h3>Recommended for Tech Companies Undergoing Digital Transformation:</h3>" +
+                  "<p><b>Consult Service:</b> Navigate your digital transition smoothly with our expert consultations in digital transformation, agile methodologies, and more.</p>" +
+                  "<p><b>Premium Membership Package:</b> Get access to specialized courses, e-catalog placements, and other benefits tailored for your digital journey.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Corporations Looking to Expand Digital Talent Pool'",
+            html: "<h3>Recommended for Corporations Expanding their Digital Talent Pool:</h3>" +
+                  "<p><b>Job Fair Sponsorship:</b> Reach out to a wide talent pool through our specialized job fairs. Find the talent that fits your digital ambitions.</p>" +
+                  "<p><b>Recruitment Sponsorship:</b> Collaborate with us in our coding bootcamps to groom talent for your future needs.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Corporations Focused on Product Digitalization'",
+            html: "<h3>Recommended for Corporations Focused on Product Digitalization:</h3>" +
+                  "<p><b>E-Catalog:</b> Highlight your newly digitalized products in our extensive e-catalog, reaching out to a vast and relevant audience.</p>" +
+                  "<p><b>Consult Service:</b> Refine your product digitalization strategies and implementations with our expert advice.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Brands Targeting Tech-Savvy Audience'",
+            html: "<h3>Recommended for Brands Targeting a Tech-Savvy Audience:</h3>" +
+                  "<p><b>The Digital Channel:</b> Engage directly with the tech-savvy audience in our weekly 1-hour digital event.</p>" +
+                  "<p><b>Tech Conference:</b> Position your brand alongside top tech speakers and events, enhancing your brand's tech credibility.</p>"
+        },
+        {
+            type: "html",
+            name: "productRecommendation",
+            visibleIf: "{subType}='Niche Brands Seeking Specific Exposure'",
+            html: "<h3>Recommended for Niche Brands Seeking Specific Exposure:</h3>" +
+                  "<p><b>E-Catalog:</b> Find the right audience for your niche offerings through placements in our e-catalog.</p>" +
+                  "<p><b>Membership Package:</b> Engage with a specialized audience through newsletters, booth events, and more to enhance your niche presence.</p>"
+        }
+    ]
+}
+
+    ]
+};
+
+var survey = new Survey.Model(json);
+
+survey.onComplete.add(function(sender, options) {
+    var resultAsString = JSON.stringify(options.data);
+    alert(resultAsString); // This just shows the survey results. You can replace this with a more suitable function, like sending data to a backend or generating a report.
+});
+
+
+$(function() {
+    $("#surveyElement").Survey({ model: survey });
+});
+</script>
+</head>
+<body>
+<h1><a href="company.html">Home</a></h1>
+<div id="surveyElement"></div>
+<div>Products</div>
+<div class="container mt-4">
+    <h2 class="mb-4">Our Products</h2>
+
+    <!-- Membership Package -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Membership Package (4,000 Baht/month)</h5>
+            <p class="card-text">
+                Access to our exclusive newsletter and booth events.
+            </p>
+        </div>
+    </div>
+
+    <!-- Premium Membership Package -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Premium Membership Package</h5>
+            <p class="card-text">
+                All benefits of the Membership Package, plus 6 free courses, 2-page E-Catalog placement, 1-hour Digital Consultancy Service, 1-time appearance on The Digital Channel, discounts at tech conferences, and access to our Job Fair.
+            </p>
+        </div>
+    </div>
+
+    <!-- Sponsorship for Branding -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Sponsorship for Branding</h5>
+            <p class="card-text">
+                Feature your logo across all materials in our ecosystem.
+            </p>
+        </div>
+    </div>
+
+    <!-- Sponsorship for Recruitment -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Sponsorship for Recruitment</h5>
+            <p class="card-text">
+                Sponsor a student's tuition for our coding bootcamp. In exchange, they work for your company for at least a year.
+            </p>
+        </div>
+    </div>
+
+    <!-- Sponsorship for Job Fair -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Sponsorship for Job Fair</h5>
+            <p class="card-text">
+                Get enhanced exposure during our bi-monthly job fairs at level B universities.
+            </p>
+        </div>
+    </div>
+
+    <!-- Tech Conference -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Tech Conference</h5>
+            <p class="card-text">
+                Join top speakers from around Thailand at our conferences in Khon Kaen and Chon Buri. 300 attendees per event.
+            </p>
+        </div>
+    </div>
+
+    <!-- E-Catalog -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">E-Catalog</h5>
+            <p class="card-text">
+                Membership product holders can list their products in our e-catalog. Distributed to 500+ companies, governments, and universities.
+            </p>
+        </div>
+    </div>
+
+    <!-- The Digital Channel -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">The Digital Channel</h5>
+            <p class="card-text">
+                Participate in our 1-hour digital event, aired once a week.
+            </p>
+        </div>
+    </div>
+
+    <!-- Consult Service -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Consult Service</h5>
+            <p class="card-text">
+                Expert consultations in digital transformation, agile methodologies, UX/UI, and other digital technologies.
+            </p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
