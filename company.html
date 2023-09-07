@@ -1,16 +1,23 @@
 <html>
 <head>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Prompt|Trirong">
     <link href="https://unpkg.com/survey-jquery/defaultV2.min.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/survey-jquery/survey.jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<style>
+body {
+  font-family: "Trirong", sans-serif;
+}
+h1,h2,h3 {
+  font-family: "Prompt", sans-serif;
+}
+</style>
 <script>
 var json = {
-    title: "Company Product Recommendation Survey",
+    title: "เพื่อให้ท่านสามารถเข้าใจใน Package สมาชิก และเลือกเป็น Sponsor ใน Project ของเราได้อย่างเหมาะสม กรุณากรอกลักษณะของบริษัทของท่าน เพื่อเลือกว่าท่านจะเหมาะกับ Project ใดของเรา",
     showProgressBar: "bottom",
     pages: [{
             questions: [
@@ -195,14 +202,149 @@ $(function() {
 </head>
 <body>
 <h1><a href="company.html">Home</a></h1>
+<div class="container mt-4">
+	<h2 class="mb-4">โครงการรับสมัครสมาชิกของ ATSI และรับสมัคร Sponsor สำหรับ Project ต่างๆ ของ ATSI</h2>
+	 <div class="container">
+
+        <!-- Title Section -->
+        <div class="text-center mb-5">
+            <h2>ATSI และ SE HUB นำเสนอโครงการพัฒนาศักยภาพดิจิทัล</h2>
+        </div>
+
+        <!-- Highlighted Offers -->
+        <div class="alert alert-primary">
+            แจก Course ฟรี บริษัทละ 1 course ต่อ 1 ที่นั่ง ใน 5 course ของเรา(มูลค่ารวม 60,000 บาท)
+        </div>
+        <div class="alert alert-success">
+            พิเศษ สำหรับสมาชิกสมาคม ATSI สามารถ สมัคร package premium เพียง 2,000 บาท เพื่อรับ course เพิ่ม อีกบริษัท ละ 1 ที่ ต่อ 1 course
+        </div>
+
+        <!-- Detailed Description -->
+        <p class="lead">
+            เนื่องด้วย ATSI [สมาคมอุตสาหกรรมซอฟต์แวร์ไทย] ร่วมกับ SE HUB มีความประสงค์ที่จะนำเสนอโครงการ พัฒนาศักยภาพบุคลากรด้านการพัฒนาซอฟต์แวร์และทักษะความรู้ความชำนาญในการใช้เครื่องมือในยุคดิจิทัลแบบครอบคลุมทั่วประเทศ
+        </p>
+
+        <h4 class="mb-4">Course ที่นำเสนอ:</h4>
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item">1. Open code lab camp - เรียน 4 เดือนเต็ม จบมาเป็น Programmer ได้</li>
+            <li class="list-group-item">2. Pre camp open code lab - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">3. Digital transformation camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">4. Low Code Camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">5. TAs boot Camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+            <li class="list-group-item">6. English IT Camp - เรียน 6 วันเต็ม มูลค่า 12,000 บาท <span style="color:red;">(แจกฟรี จำนวนจำกัด) </span></li>
+        </ul>
+		<p class="lead">
+            ซึ่งโครงการนี้รับผิดชอบดำเนินโครงการโดย คุณ กฤษฏา เฉลิมสุข (คุณโอ๊ค) ผู้ร่วมก่อตั้งและอดีตนายกสมาคมโปรแกรมเมอร์ไทย ซึ่งเป็นผู้มีประสบการณ์ การปั้น บุคลากร Programmer มาแล้วไม่ต่ำกว่า 300 ราย
+        </p>
+
+        <h4 class="mb-4">แนวคิดของโครงการ:</h4>
+        <p>
+            แนวคิดหลักของโครงการคือ การพัฒนาบุคคลากรด้านเทคโนโลยีดิจิทัลที่มีคุณภาพเพื่อรองรับต่อความต้องการของผู้ประกอบการและประเทศ และ เพื่อส่งเสริมพัฒนาบุคลากรที่มีคุณภาพได้อย่างต่อเนื่องและยั่งยืน
+        </p>
+        <p class="lead">
+            เราเชื่อว่าโครงการนี้จะมีผลที่ดีต่อผู้ประกอบการและต่อสังคม ซึ่งเรากำลังมองหาผู้ร่วมสนับสนุนที่การดำเนินการโครงการได้อย่างต่อเนื่อง
+        </p>
+
+        <div class="alert alert-info">
+            ทั้งนี้ทางสมาคม มีความประสงค์ที่จะแจกทุนสำหรับหรับ ทุกๆ แคมป์ ให้กับทางผู้ประกอบการ ได้ส่งพนักงานเข้ามา upskill ฟรี 1 ท่าน ในทุกๆ camp (*ยกเว้น open code lab camp)
+        </div>
+		<hr/>
+		<div class="text-center mb-5">
+            <h2>ATSI และ SE HUB รับสมัคร Sponsor สำหรับ Project ต่างๆ ของ ATSI</h2>
+        </div>
+		<h4 class="mb-4">โครงการอื่นๆ  ที่นำเสนอ เพื่อขอสนับสนุน Sponsor (ดูรายละเอียดเพิ่มเติมได้ที่ด้านล่างหน้านี้)</h4>
+        <ul class="list-group list-group-flush mb-4">
+    <li class="list-group-item">
+        <strong>Basic Membership Package - 4,000 baht/month</strong>
+        <ul>
+            <li>Access to company newsletters.</li>
+            <li>Access to booth events.</li>
+            <li>Inclusion of company's products in the e-catalog (up to 2 pages).</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Premium Membership Package - Additional 2,000 baht (requires Basic Membership)</strong>
+        <ul>
+            <li>All benefits of the Basic Membership.</li>
+            <li>Access to 6 courses for free.</li>
+            <li>Inclusion of company's products in the e-catalog (up to 2 pages).</li>
+            <li>One-hour of Digital Consultancy Services.</li>
+            <li>Opportunity to appear once on The Digital Channel.</li>
+            <li>Discounts of 10-50% on tech conference tickets.</li>
+            <li>Eligibility to participate in our Job Fair.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Branding Sponsorship</strong>
+        <ul>
+            <li>Logo placement on all materials within our ecosystem.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Recruitment Sponsorship (Coding Bootcamp)</strong>
+        <ul>
+            <li>Companies sponsor students' tuition fees.</li>
+            <li>Students learn for free.</li>
+            <li>Students are committed to work for the sponsoring company for at least 1 year.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Job Fair Sponsorship</strong>
+        <ul>
+            <li>Exposure at job fairs hosted in Level B universities and onwards (excluding Level A universities).</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Tech Conferences</strong>
+        <ul>
+            <li>Events hosted in Khon Kaen and Chon Buri.</li>
+            <li>Features top speakers from Thailand.</li>
+            <li>300 attendees per event.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>E-Catalog</strong>
+        <ul>
+            <li>Basic Membership holders can list their products (up to 2 pages).</li>
+            <li>Additional payment allows for more product listings.</li>
+            <li>Catalog is sent to 500 entities, including companies, government agencies, and universities.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>The Digital Channel</strong>
+        <ul>
+            <li>Hourly event aired once a week.</li>
+            <li>Opportunities for companies to participate.</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <strong>Digital Consultancy Services</strong>
+        <ul>
+            <li>Guidance on digital transformation, agile methodologies, UX/UI design, and other digital technologies.</li>
+        </ul>
+    </li>
+</ul>
+        
+
+        <!-- Action -->
+        <div class="mt-5">
+            <h5>สนใจทราบข้อมูลเพิ่มเติม:</h5>
+            <p>
+                หากทางผู้ประกอบการมีความประสงค์รับฟังข้อมูลโครงการ เพิ่มเติม สามารถทัก chat line เพื่อขอข้อมูลเพิ่มเติมได้เลยค่ะ
+            </p>
+        </div>
+
+    </div>
+</div>
+
 <div id="surveyElement"></div>
 <div class="container mt-4">
-    <h2 class="mb-4">Our Products <a href="sehub.pdf" target="_blank"> Download Full Presentation</a></h2>
+    <h2 class="mb-4">รายละเอียดเพิ่มเติมสำหรับรายการ Package สมาชิก และ Project ที่ท่านสามารถช่วยสนับสนุนได้ <a href="sehub.pdf" target="_blank"> Download Full Presentation</a></h2>
 
     <!-- Membership Package -->
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">Membership Package (4,000 Baht/month)</h5>
+            <h5 class="card-title">Membership Package (4,000 บาท/ปี)</h5>
             <p class="card-text">
 			 <ul>
                      <li>Exclusive access to our insightful newsletters, keeping you updated with industry trends.</li>
