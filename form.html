@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Form</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://unpkg.com/survey-jquery/defaultV2.min.css"/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src='https://unpkg.com/survey-jquery/survey.jquery.min.js'></script>
+    <script>
+        const surveyJson = {
+ "title": "Application Form for the Design Excellence Award",
+ "pages": [
+  {
+   "name": "identification",
+   "elements": [
+   {
+     "type": "radiogroup",
+     "name": "applicantType",
+     "title": "ประเภทผู้สมัคร",
+     "choices": [
+      "นักออกแบบผลิตภัณฑ์",
+      "บริษัทออกแบบ",
+      "บริษัทผู้ผลิต ผู้สร้างออกที่เป็นเจ้าของผลิตภัณฑ์"
+     ]
+    },
+    {
+     "type": "text",
+     "name": "identificationNumber",
+     "title": "เลขบัตรประจำตัวประชาชน 13 หลัก / เลขนิติบุคคล 13 หลัก",
+     "inputType": "number",
+     "maxLength": 13
+    }
+   ]
+  },
+  {
+   "name": "companyInformation",
+   "elements": [
+    {
+     "type": "text",
+     "name": "companyNameThai",
+     "title": "บริษัท / ผู้ออกแบบ (ภาษาไทย)"
+    },
+    {
+     "type": "text",
+     "name": "companyNameEnglish",
+     "title": "บริษัท / ผู้ออกแบบ (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "text",
+     "name": "managerNameThai",
+     "title": "กรรมการผู้จัดการ (ภาษาไทย)"
+    },
+    {
+     "type": "text",
+     "name": "managerNameEnglish",
+     "title": "กรรมการผู้จัดการ (ภาษาอังกฤษ)"
+    }
+   ]
+  },
+  {
+   "name": "businessInformation",
+   "elements": [
+    {
+     "type": "text",
+     "name": "businessTypeThai",
+     "title": "ประเภทกิจการ (ภาษาไทย)"
+    },
+    {
+     "type": "text",
+     "name": "businessTypeEnglish",
+     "title": "ประเภทกิจการ (ภาษาอังกฤษ)"
+    }
+   ]
+  },
+  {
+   "name": "contactPerson",
+   "elements": [
+    {
+     "type": "text",
+     "name": "contactPersonThai",
+     "title": "เจ้าหน้าที่ที่ติดต่อประสานงานโดยตรง (ภาษาไทย)"
+    },
+    {
+     "type": "text",
+     "name": "contactPersonEnglish",
+     "title": "เจ้าหน้าที่ที่ติดต่อประสานงานโดยตรง (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "text",
+     "name": "contactNumber",
+     "title": "(เบอร์ติดต่อ)"
+    },
+    {
+     "type": "text",
+     "name": "contactEmail",
+     "title": "(Email)",
+     "validators": [
+      {
+       "type": "email",
+       "text": "Please enter a valid email address."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "additionalContactDetails",
+   "elements": [
+    {
+     "type": "text",
+     "name": "telephone",
+     "title": "โทรศัพท์"
+    },
+    {
+     "type": "text",
+     "name": "mobile",
+     "title": "มือถือ"
+    },
+    {
+     "type": "text",
+     "name": "fax",
+     "title": "โทรสาร"
+    },
+    {
+     "type": "text",
+     "name": "emailAdditional",
+     "title": "E-mail",
+     "validators": [
+      {
+       "type": "email",
+       "text": "Please enter a valid email address."
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "name": "website",
+     "title": "Website"
+    }
+   ]
+  },
+  {
+   "name": "employeeDetails",
+   "elements": [
+    {
+     "type": "text",
+     "name": "employeeCount",
+     "title": "จำนวนพนักงาน"
+    },
+    {
+     "type": "text",
+     "name": "designerCount",
+     "title": "จำนวนนักออกแบบ"
+    }
+   ]
+  },
+  {
+   "name": "recipientDetails",
+   "elements": [
+    {
+     "type": "text",
+     "name": "recipientName",
+     "title": "ชื่อผู้รับ"
+    },
+    {
+     "type": "text",
+     "name": "recipientAddress",
+     "title": "ที่อยู่ผู้รับ"
+    }
+   ]
+  }
+ ,
+  {
+   "name": "applicationProofs",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "designerProof",
+     "visibleIf": "{applicantType} = 'นักออกแบบผลิตภัณฑ์'",
+     "title": "หลักฐานการสมัครสำหรับนักออกแบบ",
+     "description": "Please describe any proofs attached for application as a designer, e.g., permission from product owner, etc."
+    },
+    {
+     "type": "comment",
+     "name": "corporateProof",
+     "visibleIf": "{applicantType} = 'บริษัทออกแบบ' or {applicantType} = 'บริษัทผู้ผลิต ผู้สร้างออกที่เป็นเจ้าของผลิตภัณฑ์'",
+     "title": "หลักฐานการสมัครสำหรับนิติบุคคล",
+     "description": "Please describe any proofs attached for application as a corporate entity, e.g., registration certificate, shareholder list, etc."
+    },
+    {
+     "type": "comment",
+     "name": "productDetails",
+     "title": "Details regarding the product, certifications, awards, etc.",
+     "description": "Please provide any details regarding product pricing, certifications, awards, etc. Attach any relevant documents separately."
+    },
+    {
+     "type": "file",
+     "name": "attachedProofs",
+     "title": "Attach any relevant proofs/documents here",
+     "description": "Please attach any relevant proofs, certifications, awards, etc. here. Ensure filenames describe the content accurately."
+    }
+   ]
+  }
+,
+  {
+   "name": "productCategory",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "mainCategory",
+     "title": "ประเภทการประกวดผลิตภัณฑ์ (Product Design Category)",
+     "choices": [
+      "กลุ่มสินค้าเฟอร์นิเจอร์ (Furniture)",
+      "กลุ่มสินค้าไลฟ์สไตล์และแฟชั่น (Lifestyle and Fashion)",
+      "กลุ่มสินค้าอุตสาหกรรมและดิจิทัล (Industrial and Digital)",
+      "กลุ่มออกแบบบรรจุภัณฑ์ (Packaging Design)",
+      "กลุ่มผลงานกราฟิกดีไซน์ (Graphic Design)",
+      "กลุ่มผลงานออกแบบตกแต่งภายใน (Interior Design)",
+      "กลุ่มผลงานออกแบบระบบ บริการและแพลตฟอร์มดิจิทัล (System, Service, and Digital Platform Design)"
+     ]
+    },
+    {
+     "type": "comment",
+     "name": "subcategory",
+     "startWithNewLine": false,
+     "title": "Please specify any subcategory or specific details:",
+     "visibleIf": "{mainCategory} notempty"
+    }
+   ]
+  }
+ ,
+  {
+   "name": "productGeneralInformation",
+   "elements": [
+    {
+     "type": "text",
+     "name": "productNameThai",
+     "title": "ผลิตภัณฑ์ที่สมัครคือ (ภาษาไทย)"
+    },
+    {
+     "type": "text",
+     "name": "productNameEnglish",
+     "title": "ผลิตภัณฑ์ที่สมัครคือ (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "text",
+     "name": "productProvince",
+     "title": "จังหวัดผลิตสินค้า"
+    },
+    {
+     "type": "comment",
+     "name": "additionalLocationDetails",
+     "title": "Additional Location Details (if applicable)",
+     "description": "If applying in the Interior category, please specify the location (Hotel, Restaurant, Cafe) that was designed."
+    },
+    {
+     "type": "text",
+     "name": "productMarks",
+     "title": "เครื่องหมายการค้าของบริษัท / ตราสินค้า (if applicable)"
+    },
+    {
+     "type": "comment",
+     "name": "productCertifications",
+     "title": "Certifications",
+     "description": "Please provide details of any certifications received from institutes for the product."
+    }
+   ]
+  }
+ ,
+  {
+   "name": "productAndDesignerDetails",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "productAwards",
+     "title": "Awards and Certifications",
+     "description": "Please provide details of any awards, certifications, or recognitions received by the product, both nationally and internationally (e.g., ISO, G-MARK, RED DOT, etc.)."
+    },
+    {
+     "type": "text",
+     "name": "productPatent",
+     "title": "Patents",
+     "description": "Please provide details if the product has received any patents."
+    },
+    {
+     "type": "text",
+     "name": "productOtherCertifications",
+     "title": "Other Quality Certifications",
+     "description": "Please provide details of any other quality certifications received by the product."
+    },
+    {
+     "type": "text",
+     "name": "productVideoLink",
+     "title": "Product Video Link",
+     "description": "If available, provide a link to a short video (approximately 15 seconds) demonstrating the product."
+    },
+    {
+     "type": "text",
+     "name": "designerNameThai",
+     "title": "ชื่อผู้ออกแบบ (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "designerPositionThai",
+     "title": "ตำแหน่ง (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "designerNameEnglish",
+     "title": "ชื่อผู้ออกแบบ (English)"
+    },
+    {
+     "type": "text",
+     "name": "designerPositionEnglish",
+     "title": "ตำแหน่ง (English)"
+    },
+    {
+     "type": "text",
+     "name": "designControllerNameThai",
+     "title": "ชื่อผู้ควบคุมการออกแบบ (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "designControllerPositionThai",
+     "title": "ตำแหน่ง (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "designControllerNameEnglish",
+     "title": "ชื่อผู้ควบคุมการออกแบบ (English)"
+    },
+    {
+     "type": "text",
+     "name": "designControllerPositionEnglish",
+     "title": "ตำแหน่ง (English)"
+    }
+   ]
+  }
+ ,
+  {
+   "name": "productionAndProductDetails",
+   "elements": [
+    {
+     "type": "text",
+     "name": "productionControllerNameThai",
+     "title": "ชื่อผู้ควบคุมการผลิต (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "productionControllerPositionThai",
+     "title": "ตำแหน่ง (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "productionControllerNameEnglish",
+     "title": "ชื่อผู้ควบคุมการผลิต (English)"
+    },
+    {
+     "type": "text",
+     "name": "productionControllerPositionEnglish",
+     "title": "ตำแหน่ง (English)"
+    },
+    {
+     "type": "text",
+     "name": "producingCompanyNameThai",
+     "title": "ข้อมูลบริษัทผู้ผลิต / บริษัทเจ้าของผลิตภัณฑ์ (ไทย)"
+    },
+    {
+     "type": "text",
+     "name": "producingCompanyNameEnglish",
+     "title": "ข้อมูลบริษัทผู้ผลิต / บริษัทเจ้าของผลิตภัณฑ์ (English)"
+    },
+    {
+     "type": "text",
+     "name": "retailPrice",
+     "title": "ราคาขายปลีก",
+     "description": "Please provide the retail price in THB and/or USD."
+    },
+    {
+     "type": "text",
+     "name": "productDimensions",
+     "title": "ขนาด"
+    },
+    {
+     "type": "text",
+     "name": "productWeight",
+     "title": "น้ำหนัก"
+    },
+    {
+     "type": "text",
+     "name": "productMaterials",
+     "title": "วัสดุ",
+     "description": "Please describe the materials used in the product."
+    }
+   ]
+  }
+ ,
+  {
+   "name": "productLaunchAndDisplayDetails",
+   "elements": [
+    {
+     "type": "text",
+     "name": "launchDate",
+     "title": "วันที่เริ่มวางตลาด"
+    },
+    {
+     "type": "text",
+     "name": "saleLocations",
+     "title": "สถานที่จัดจำหน่ายสินค้าในประเทศ"
+    },
+    {
+     "type": "text",
+     "name": "exportMarkets",
+     "title": "ตลาดต่างประเทศ (ระบุประเทศ)"
+    },
+    {
+     "type": "text",
+     "name": "approximateExportValue",
+     "title": "มูลค่าการส่งออกสินค้า, ผลิตภัณฑ์, ผลงาน (โดยประมาณ) ตั้งแต่วันที่วางตลาด"
+    },
+    {
+     "type": "comment",
+     "name": "displayAreaDetails",
+     "title": "พื้นที่จัดแสดงสินค้าในงานประกวด",
+     "description": "Please provide details about the display area for the product in the competition, specifying the sizes and any particular requirements based on the product category and size."
+    }
+   ]
+  }
+ ,
+  {
+   "name": "marketingAndDesignDetails",
+   "elements": [
+    {
+     "type": "text",
+     "name": "productionQuantity",
+     "title": "จำนวนผลิต / ปี (โดยประมาณ)"
+    },
+    {
+     "type": "comment",
+     "name": "specialCharacteristicsThai",
+     "title": "ลักษณะพิเศษของผลิตภัณฑ์ที่สมัคร (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "specialCharacteristicsEnglish",
+     "title": "ลักษณะพิเศษของผลิตภัณฑ์ที่สมัคร (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "designStoryThai",
+     "title": "Design Story (ที่มาและแนวคิดในการออกแบบ) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "designStoryEnglish",
+     "title": "Design Story (ที่มาและแนวคิดในการออกแบบ) (ภาษาอังกฤษ)"
+    }
+   ]
+  }
+
+,
+  {
+   "name": "strategyAndInnovation",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "marketStrategyThai",
+     "title": "กลยุทธ์ในการออกแบบเพื่อนำผลิตภัณฑ์สู่ตลาด (Design to Market Strategy) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "marketStrategyEnglish",
+     "title": "กลยุทธ์ในการออกแบบเพื่อนำผลิตภัณฑ์สู่ตลาด (Design to Market Strategy) (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "innovativeThinkingThai",
+     "title": "Innovative Thinking (ความคิดริเริ่มสร้างสรรค์, เป็นต้นแบบที่แตกต่างจากที่เคยมีมา, มีผลกระทบต่ออนาคต) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "innovativeThinkingEnglish",
+     "title": "Innovative Thinking (Creativity, Novelty, Future Impact) (ภาษาอังกฤษ)"
+    }
+   ]
+  }
+ ,
+  {
+   "name": "designAttributes",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "newTechOrMaterialsThai",
+     "title": "ใช้เทคโนโลยีหรือวัสดุใหม่ๆ (New technology or New Materials) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "newTechOrMaterialsEnglish",
+     "title": "ใช้เทคโนโลยีหรือวัสดุใหม่ๆ (New technology or New Materials) (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "emotionalAestheticsThai",
+     "title": "Emotional/Aesthetics (งดงาม) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "emotionalAestheticsEnglish",
+     "title": "Emotional/Aesthetics (งดงาม) (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "enhancingLifestyleThai",
+     "title": "สร้างเสริมรูปแบบการใช้ชีวิต (Enhancing Living Lifestyle) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "enhancingLifestyleEnglish",
+     "title": "สร้างเสริมรูปแบบการใช้ชีวิต (Enhancing Living Lifestyle) (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "userValueThai",
+     "title": "User Value (ประโยชน์ใช้สอย) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "userValueEnglish",
+     "title": "User Value (ประโยชน์ใช้สอย) (ภาษาอังกฤษ)"
+    }
+   ]
+  }
+
+,
+  {
+   "name": "userSatisfactionAndUniversalDesign",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "userSatisfactionThai",
+     "title": "ความพึงพอใจของผู้ใช้ (Utilization, Convenience/Comfort, Satisfying Consumer’s Needs, Safety) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "userSatisfactionEnglish",
+     "title": "ความพึงพอใจของผู้ใช้ (Utilization, Convenience/Comfort, Satisfying Consumer’s Needs, Safety) (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "universalDesignThai",
+     "title": "ออกแบบเพื่อตอบสนองกลุ่มผู้ใช้ได้หลากหลาย (Universal Design) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "universalDesignEnglish",
+     "title": "ออกแบบเพื่อตอบสนองกลุ่มผู้ใช้ได้หลากหลาย (Universal Design) (ภาษาอังกฤษ)"
+    }
+   ]
+  }
+
+,
+  {
+   "name": "creativeThinkingAndResponsibility",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "creativeThinkingStimulusThai",
+     "title": "Stimulus to the User’s Creative Thinking (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "creativeThinkingStimulusEnglish",
+     "title": "Stimulus to the User’s Creative Thinking (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "sustainableValueThai",
+     "title": "Sustainable Value (Long Lifetime/Durability) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "sustainableValueEnglish",
+     "title": "Sustainable Value (Long Lifetime/Durability) (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "socialResponsibilityThai",
+     "title": "Socially Responsible (คำนึงถึงผลกระทบต่อสังคม) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "socialResponsibilityEnglish",
+     "title": "Socially Responsible (คำนึงถึงผลกระทบต่อสังคม) (ภาษาอังกฤษ)"
+    }
+   ]
+  }
+
+,
+  {
+   "name": "sustainableDevelopment",
+   "elements": [
+    {
+     "type": "comment",
+     "name": "sustainableDesignDevelopmentThai",
+     "title": "Important and Sustainable Design Development (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "sustainableDesignDevelopmentEnglish",
+     "title": "Important and Sustainable Design Development (ภาษาอังกฤษ)"
+    },
+    {
+     "type": "comment",
+     "name": "SDGsConsiderationThai",
+     "title": "Consideration towards Sustainable Development Goals (SDGs) (ภาษาไทย)"
+    },
+    {
+     "type": "comment",
+     "name": "SDGsConsiderationEnglish",
+     "title": "Consideration towards Sustainable Development Goals (SDGs) (ภาษาอังกฤษ)"
+    }
+   ]
+ 
+}
+
+ ]
+};
+
+const survey = new Survey.Model(surveyJson);
+survey.focusFirstQuestionAutomatic = false;
+
+function alertResults (sender) {
+    const results = JSON.stringify(sender.data);
+    alert(results);
+}
+
+survey.onComplete.add(alertResults);
+
+$(function() {
+    $("#surveyContainer").Survey({ model: survey });
+});
+    </script>
+</head>
+<body>
+    <div id="surveyContainer"></div>
+
+</body>
+</html>
